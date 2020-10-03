@@ -1,0 +1,45 @@
+$font-size-base: 1rem;
+$h3-font-size: 1.5rem;
+$h1-font-size: 2rem;
+
+@import url('../css/source_sans_pro.css');
+
+$font-family-sans-serif:  "Source Sans Pro", Helvetica, Arial, sans-serif !default;
+
+$theme-colors: (
+        "primary": #103867,
+        "secondary": #777777,
+        "danger": #b74020,
+        "custom-white": #ffffff
+);
+
+$padding-base-vertical: 3px;
+$padding-base-horizontal: 6px;
+
+$padding-large-vertical: 5px;
+$padding-large-horizontal: 8px;
+
+$padding-small-vertical: 3px;
+$padding-small-horizontal: 5px;
+
+$padding-xs-vertical: 1px;
+$padding-xs-horizontal: 3px;
+
+$table-cell-padding: 4px;
+$table-condensed-cell-padding: 2px;
+
+$form-group-margin-bottom: 10px;
+
+$grid-gutter-width: 30px;
+
+$nav-link-padding: 5px 8px;
+
+$panel-body-padding: 8px;
+$panel-heading-padding: 5px 8px;
+
+$border-radius-base:  0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+$pager-border-radius: 0;
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';
