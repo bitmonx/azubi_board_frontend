@@ -5,12 +5,16 @@ import router from '@/router'
 const state = {
   currentListing: {
     items: []
-  }
+  },
+  checkedListings: []
 }
 
 const mutations = {
   SET_CURRENT (state, listing) {
     state.currentListing = listing
+  },
+  SET_CHECKED (state, listings) {
+    state.checkedListings = listings
   },
   ADD_ITEM (state, item) {
     state.currentListing.items.push(item)
@@ -29,7 +33,7 @@ const mutations = {
     state.currentListing.checked_by = data.user.uid
   },
   FINISH_LIST (state, data) {
-    state.currentListing.done_by = data.user.uid
+    state.checkedListings.splice(data.index, 1)
   }
 }
 
@@ -43,6 +47,21 @@ const actions = {
       .then(res => {
         if (res.data) {
           commit('SET_CURRENT', res.data.data)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  fetchChecked ({ commit }) {
+    axios.get('listings/undone', {
+      headers: {
+        Authorization: `Bearer ${store.state.accessToken}`
+      }
+    })
+      .then(res => {
+        if (res.data) {
+          commit('SET_CHECKED', res.data.data)
         }
       })
       .catch(err => {
@@ -104,6 +123,7 @@ const actions = {
       .then(res => {
         if (res.status === 200) {
           commit('CHECK_LIST', data)
+          store.dispatch('fetchCurrent')
         }
       })
       .catch(err => {
@@ -130,6 +150,9 @@ const actions = {
 const getters = {
   getCurrent (state) {
     return state.currentListing
+  },
+  getChecked (state) {
+    return state.checkedListings
   },
   getItemById: state => (itemId) => {
     return state.currentListing.items.find(element => {

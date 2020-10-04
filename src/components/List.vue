@@ -10,19 +10,23 @@
     </transition-group>
     <div class="buttons">
       <button
-        v-if="user.department === 'Softwareentwicklung' && list.items.length > 0"
+        v-if="user.department === 'Softwareentwicklung' && list.items.length > 0 && parent === 'listing'"
         type="button"
         class="btn btn-primary btn-block"
-        :disabled="list.checked_by !== null"
+        :disabled="list.checked_by !== null || checkedListings.length >= 2"
         @click="checkList"
       >Liste freigeben</button>
       <button
-        v-if="user.isTrainee  && list.items.length > 0"
+        v-if="user.isTrainee  && list.items.length > 0 && parent === 'checkedListings'"
         type="button"
         class="btn btn-success btn-block"
         :disabled="list.checked_by === null"
         @click="finishList"
       >Liste abschließen</button>
+    </div>
+    <div class="alert alert-warning" v-if="parent === 'listing' && checkedListings.length >= 2">
+      Es dürfen maximal 2 Listen gleichzeitig genehmigt sein.
+      Bitte warte auf die Bearbeitung oder setze dich mit den Azubis in Verbinund, falls es dringend ist.
     </div>
   </div>
 </template>
@@ -33,11 +37,25 @@ import Item from '@/components/Item'
 export default {
   name: 'List',
   computed: {
-    list () {
-      return this.$store.getters.getCurrent
-    },
     user () {
       return this.$store.getters.user
+    },
+    checkedListings () {
+      return this.$store.getters.getChecked
+    }
+  },
+  props: {
+    parent: {
+      type: String,
+      requires: true
+    },
+    list: {
+      type: Object,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: false
     }
   },
   methods: {
@@ -49,10 +67,10 @@ export default {
     },
     finishList () {
       this.$store.dispatch('finishList', {
+        index: this.index,
         listId: this.list.id,
         user: this.user
       })
-      this.$store.dispatch('fetchCurrent')
     }
   },
   components: {

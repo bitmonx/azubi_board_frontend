@@ -9,12 +9,12 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ml-5">
-          <router-link to="/" tag="li" class="nav-item" active-class="active" exact>
-            <a class="nav-link">Aufgaben</a>
-          </router-link>
-          <router-link to="/dienstplan" tag="li" class="nav-item" active-class="active">
-            <a class="nav-link">Dienstplan</a>
-          </router-link>
+        <router-link to="/" tag="li" class="nav-item" active-class="active" exact>
+          <a class="nav-link">Aufgaben</a>
+        </router-link>
+        <router-link to="/checked" tag="li" class="nav-item" active-class="active" exact v-if="checkedListings.length > 0">
+          <a class="nav-link">Geprüfte Listen</a>
+        </router-link>
       </ul>
       <div class="navbar-end">
         <router-link to="/" class="nav-link">
@@ -27,7 +27,12 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  computed: {
+    checkedListings () {
+      return this.$store.getters.getChecked
+    }
+  }
 }
 </script>
 

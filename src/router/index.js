@@ -32,6 +32,11 @@ const routes = [
         ]
       },
       {
+        path: 'checked',
+        name: 'checkedListings',
+        component: () => import('@/views/CheckedListings')
+      },
+      {
         path: 'dienstplan',
         name: 'roster',
         component: () => import('@/views/Roster')

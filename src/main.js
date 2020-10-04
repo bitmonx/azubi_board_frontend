@@ -10,7 +10,7 @@ import '../src/assets/css/styles.css'
 import '@/font-awesome/index'
 
 // Sets base url for sending http requests with axios
-axios.defaults.baseURL = 'http://azubi-board.localhost'
+axios.defaults.baseURL = 'http://azubiboard.localhost'
 
 // Creates a vue filter for formatting built-in Date objects
 Vue.filter('dateFormat', function (value) {

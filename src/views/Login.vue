@@ -5,7 +5,7 @@
         </div>
         <div class="form-input">
           <h1>Login</h1>
-          <div class="alert-danger" v-if="loginError">
+          <div class="alert alert-danger" v-if="loginError">
             Benutzername oder Passwort sind nicht korrekt.
           </div>
           <form v-on:submit.prevent="login">

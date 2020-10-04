@@ -1,6 +1,6 @@
 <template>
     <div class="listing">
-      <app-list></app-list>
+      <app-list parent="listing" :list="list"></app-list>
       <router-view :key="$route.fullPath"></router-view>
     </div>
 </template>
@@ -12,6 +12,11 @@ export default {
   name: 'Listing',
   components: {
     'app-list': List
+  },
+  computed: {
+    list () {
+      return this.$store.getters.getCurrent
+    }
   },
   beforeCreate () {
     this.$store.dispatch('fetchCurrent')
