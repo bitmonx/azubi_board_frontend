@@ -47,6 +47,14 @@ export default {
         itemId: this.$route.params.id
       }
       this.$store.dispatch('editItem', data)
+      if (this.isUrgent(data.deadline)) {
+        this.$store.dispatch('triggerAlert', 'approving')
+      }
+    },
+    isUrgent (date) {
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      return date <= tomorrow
     }
   },
   created () {

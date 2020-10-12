@@ -47,6 +47,19 @@ export default new Vuex.Store({
           console.log(err)
           commit('SET_LOGIN_ERROR')
         })
+    },
+    triggerAlert ({ commit }, type) {
+      axios.get('alerts/' + type, {
+        headers: {
+          Authorization: `Bearer ${this.state.accessToken}`
+        }
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   getters: {

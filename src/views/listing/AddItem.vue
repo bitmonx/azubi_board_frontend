@@ -50,8 +50,16 @@ export default {
       formData.append('deadline', this.deadline.toISOString())
       formData.append('listing_id', this.listing.id)
       this.$store.dispatch('addItem', formData)
+      if (this.isUrgent(this.deadline)) {
+        this.$store.dispatch('triggerAlert', 'approving')
+      }
       this.deadline = null
       this.description = ''
+    },
+    isUrgent (date) {
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      return date <= tomorrow
     }
   }
 }
