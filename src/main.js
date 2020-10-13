@@ -12,6 +12,15 @@ import '@/font-awesome/index'
 // Sets base url for sending http requests with axios
 axios.defaults.baseURL = 'http://azubi-board.localhost'
 
+// Sets interceptor for auto-logout
+axios.interceptors.response.use(function (response) {
+  return response
+}, function (error) {
+  if (error.response.status === 401) {
+
+  }
+})
+
 // Creates a vue filter for formatting built-in Date objects
 Vue.filter('dateFormat', function (value) {
   return value.toLocaleDateString()
