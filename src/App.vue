@@ -23,6 +23,7 @@ export default {
     axios.get('test')
       .then(res => {
         this.error = false
+        this.$store.dispatch('tryAutoLogin')
       })
       .catch(e => {
         this.error = true

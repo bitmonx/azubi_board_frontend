@@ -2,6 +2,7 @@
   <footer class="footer">
     <fa-icon icon="user"></fa-icon>
     <span>Wer ist angemeldet?</span> {{ user.firstname }}
+    <button @click="logout" class="btn btn-sm btn-danger">Logout</button>
   </footer>
 </template>
 
@@ -11,6 +12,11 @@ export default {
   computed: {
     user () {
       return this.$store.getters.user
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
     }
   }
 }
