@@ -2,7 +2,7 @@
   <footer class="footer">
     <fa-icon icon="user"></fa-icon>
     <span>Wer ist angemeldet?</span> {{ user.firstname }}
-    <button @click="logout" class="btn btn-sm btn-danger">Logout</button>
+    <a @click="logout" class="text-danger float-right">Logout</a>
   </footer>
 </template>
 
@@ -33,6 +33,12 @@ export default {
   }
   span {
     color: #706f6f;
+  }
+  a {
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 </style>
